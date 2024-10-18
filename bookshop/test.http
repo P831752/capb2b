@@ -1,0 +1,29 @@
+@serviceName = bookshop
+### @name QueryBooks
+GET http://localhost:4004/odata/v4/Catalog
+
+### @name QueryBooks
+GET http://localhost:4004/odata/v4/Catalog/Books
+
+### @name CreateNewBook
+POST http://localhost:4004/odata/v4/Catalog/Books
+Content-Type: application/json
+
+{"title": "BANANAS Long And Thanks For All The Fish"}
+
+### @name QueryBooksAgain
+GET http://localhost:4004/odata/v4/{{serviceName}}/Books
+
+
+### @name DeleteOperation
+@book_ID = {{ BooksQuery.response.body.value[2].ID }}
+GET http://localhost:4004/odata/v4/Catalog/Books({{book_ID}})
+
+
+### 
+# @name ReadSpecificBookEntity
+GET http://localhost:4004/odata/v4/{{serviceName}}/Books({{book_ID}})
+
+### 
+# @name DeleteSpecificBookEntity
+DELETE http://localhost:4004/odata/v4/bookshop/Books({{book_ID}})
