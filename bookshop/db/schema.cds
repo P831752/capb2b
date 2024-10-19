@@ -1,5 +1,5 @@
 namespace my.bookshop;
-using { cuid, managed } from '@sap/cds/common';
+using { cuid, managed, Country } from '@sap/cds/common';
 
 //service bookshop {
 
@@ -7,11 +7,13 @@ using { cuid, managed } from '@sap/cds/common';
     //key ID    : Integer;
         title : String;
         stock : Integer;
+
   }
 
   entity Authors : cuid, managed {
     //key ID    : Integer;
         name : String;
+        countryOfBirth:Country;
   }
   
 
