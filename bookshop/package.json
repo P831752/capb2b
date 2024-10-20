@@ -8,6 +8,7 @@
   "dependencies": {
     "@cap-js/telemetry": "^1.0.1",
     "@sap/cds": "^8",
+    "@sap/cds-common-content": "^2.1.0",
     "express": "^4"
   },
   "devDependencies": {
@@ -20,10 +21,18 @@
   "cds": {
     "requires": {
       "db": {
+        "[testing]": {
           "kind": "sqlite",
           "credentials": {
             "url": "bookshop.sqlite"
           }
+        },
+        "[development]": {
+          "kind": "sqlite",
+          "credentials": {
+            "url": ":memory:"
+          }
+        }
       }
     }
   }

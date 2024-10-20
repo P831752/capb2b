@@ -1,20 +1,28 @@
 namespace my.bookshop;
-using { cuid, managed, Country } from '@sap/cds/common';
+using from '@sap/cds-common-content';
 
-//service bookshop {
+using {managed, Country } from '@sap/cds/common';
+aspect cuid {key ID:UUID}
 
-  entity Books : cuid, managed {
+  entity Books : cuid {
     //key ID    : Integer;
         title : String;
         stock : Integer;
-
+        price : Integer;
+        author : Association to Authors;
   }
 
-  entity Authors : cuid, managed {
+  entity Authors : cuid {
     //key ID    : Integer;
         name : String;
         countryOfBirth:Country;
   }
   
+service srvSchema {
+  entity something  : cuid {
+    Name:String;
+  }
 
-//}
+  entity bookref as projection on Books;
+  
+}
