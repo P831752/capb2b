@@ -2,7 +2,10 @@ namespace my.bookshop;
 using from '@sap/cds-common-content';
 
 using {managed, Country } from '@sap/cds/common';
-aspect cuid {key ID:UUID}
+
+aspect cuid {
+  key ID:UUID
+}
 
   entity Books : cuid {
     //key ID    : Integer;
@@ -16,8 +19,20 @@ aspect cuid {key ID:UUID}
     //key ID    : Integer;
         name : String;
         countryOfBirth:Country;
+        books : Association to many Books on books.author = $self
   }
   
+entity Orders : cuid { 
+  comment: String;
+  Items : Composition of many OrderItems on Items.parent = $self;
+}
+@cds.autoexpose
+entity OrderItems { // to be accessed through Orders only
+  key parent : Association to Orders;
+  key pos    : Integer;
+  quantity   : Integer;
+}
+
 service srvSchema {
   entity something  : cuid {
     Name:String;
