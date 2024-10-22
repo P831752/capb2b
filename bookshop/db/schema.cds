@@ -24,14 +24,18 @@ aspect cuid {
   
 entity Orders : cuid { 
   comment: String;
-  Items : Composition of many OrderItems on Items.parent = $self;
+  Items : Composition of many {
+          key pos    : Integer;
+          quantity   : Integer;
+          book     : Association to Books;
+  }
 }
-@cds.autoexpose
-entity OrderItems { // to be accessed through Orders only
-  key parent : Association to Orders;
-  key pos    : Integer;
-  quantity   : Integer;
-}
+//@cds.autoexpose
+// entity OrderItems { // to be accessed through Orders only
+//   key parent : Association to Orders;
+//   key pos    : Integer;
+//   quantity   : Integer;
+// }
 
 service srvSchema {
   entity something  : cuid {
