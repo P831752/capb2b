@@ -14,16 +14,31 @@ module.exports = cds.service.impl(function () {
     //     }]
     // })
 
-    this.after ('READ','Books', (data, req) => { 
+   // this.after ('READ','Books', (data, req) => { 
         //logger.log("*** After Event ***", data);
         //Anomoyous call back functions
-        data.map(book => book.title +='!');
-    })
+        //data.map(book => book.title +='!');        
+   // })
+   
+   //this.after('READ','Books', (data) => { changeUrgencyDueToSubject(data) })
+   //this.after('READ','Books', (data) =>  changeUrgencyDueToSubject(data) )//remove curly braces - still working
+   //this.after('READ','Books', changeUrgencyDueToSubject) // Not Working
 
-    this.after ('each','Books', (data, req) => { 
-        logger.log("*** Each ***:",data);
+   const changeUrgencyDueToSubject = (data) => {
+    if (data) {
+      const books = Array.isArray(data) ? data : [data];
+      books.forEach((book) => {
+        if (book.title?.toLowerCase().includes("harmless")) {
+            book.urgency = "HIGH"
+        }
+      });
+    }
+  }
+
+   // this.after ('each','Books', (data, req) => { 
+       // logger.log("*** Each ***:",data);
         //Anomoyous call back functions
         //data.map(book => book.title +='!');
-    })
+   // })
 
  })
