@@ -8,6 +8,8 @@ service CatalogService {
     entity Books as projection on my.Books;
     @readonly entity Authors as projection on my.Authors;
     entity Orders as projection on my.Orders;
+
+    function totalStock() returns Integer;
 }
 
 service Banana {
@@ -15,3 +17,4 @@ service Banana {
         key ID: Integer;
     }
 }
+

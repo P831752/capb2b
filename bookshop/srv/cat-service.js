@@ -1,6 +1,7 @@
 console.log("**** Simple Message in BTP Service *****");
 const cds = require('@sap/cds')
 const logger = cds.log('bookshop')
+const {Book123} = cds.entities('CatalogService');
 
 module.exports = cds.service.impl(function () {
     logger.log("**** JS-CDS Anomous function ****");
@@ -21,7 +22,7 @@ module.exports = cds.service.impl(function () {
    // })
    
    //this.after('READ','Books', (data) => { changeUrgencyDueToSubject(data) })
-   //this.after('READ','Books', (data) =>  changeUrgencyDueToSubject(data) )//remove curly braces - still working
+   this.after('READ',Book123, (data) =>  changeUrgencyDueToSubject(data)) //remove curly braces - still working
    //this.after('READ','Books', changeUrgencyDueToSubject) // Not Working
 
    const changeUrgencyDueToSubject = (data) => {
@@ -40,5 +41,5 @@ module.exports = cds.service.impl(function () {
         //Anomoyous call back functions
         //data.map(book => book.title +='!');
    // })
-
+    this.on('totalStock',() => 99)
  })
